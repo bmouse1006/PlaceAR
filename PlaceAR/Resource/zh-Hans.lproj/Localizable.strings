@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  PlaceAR
+
+  Created by 金 津 on 12-6-3.
+  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+*/
+"message_done" = "完成";
+"message_fetchlocation" = "获取当前位置";
+"message_fetchplaces" = "获取地点";
+"message_falied" = "失败";

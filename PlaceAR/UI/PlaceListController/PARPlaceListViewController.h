@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PARPlaceListViewController.h
 //  PlaceAR
 //
 //  Created by 金 津 on 12-6-1.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface PARPlaceListViewController : UITableViewController
+
+@property (nonatomic, retain) NSArray* placeList;
 
 @end
