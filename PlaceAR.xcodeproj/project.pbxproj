@@ -27,6 +27,9 @@
 		22544C07157B99D500507BC4 /* PARInitialLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22544C05157B99D500507BC4 /* PARInitialLoadingViewController.m */; };
 		22544C08157B99D500507BC4 /* PARInitialLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22544C06157B99D500507BC4 /* PARInitialLoadingViewController.xib */; };
 		22544C12157BA37800507BC4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22544C11157BA37800507BC4 /* AVFoundation.framework */; };
+		22544C1B157C305700507BC4 /* PARPlaceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22544C19157C305700507BC4 /* PARPlaceDetailViewController.m */; };
+		22544C1C157C305700507BC4 /* PARPlaceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22544C1A157C305700507BC4 /* PARPlaceDetailViewController.xib */; };
+		22544C1F157C318C00507BC4 /* PARPlaceListContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22544C1E157C318C00507BC4 /* PARPlaceListContainerController.m */; };
 		226B19161578FE4200D04163 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226B19151578FE4200D04163 /* UIKit.framework */; };
 		226B19181578FE4200D04163 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226B19171578FE4200D04163 /* Foundation.framework */; };
 		226B191A1578FE4200D04163 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226B19191578FE4200D04163 /* CoreGraphics.framework */; };
@@ -124,6 +127,11 @@
 		22544C05157B99D500507BC4 /* PARInitialLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARInitialLoadingViewController.m; sourceTree = "<group>"; };
 		22544C06157B99D500507BC4 /* PARInitialLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PARInitialLoadingViewController.xib; sourceTree = "<group>"; };
 		22544C11157BA37800507BC4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		22544C18157C305700507BC4 /* PARPlaceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARPlaceDetailViewController.h; sourceTree = "<group>"; };
+		22544C19157C305700507BC4 /* PARPlaceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARPlaceDetailViewController.m; sourceTree = "<group>"; };
+		22544C1A157C305700507BC4 /* PARPlaceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PARPlaceDetailViewController.xib; sourceTree = "<group>"; };
+		22544C1D157C318B00507BC4 /* PARPlaceListContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARPlaceListContainerController.h; sourceTree = "<group>"; };
+		22544C1E157C318C00507BC4 /* PARPlaceListContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARPlaceListContainerController.m; sourceTree = "<group>"; };
 		226B19111578FE4200D04163 /* PlaceAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaceAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		226B19151578FE4200D04163 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		226B19171578FE4200D04163 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -590,6 +598,11 @@
 				226B1A791579071E00D04163 /* PARPlaceListViewController.h */,
 				226B1A7A1579071E00D04163 /* PARPlaceListViewController.m */,
 				226B1A7B1579071E00D04163 /* PARPlaceListViewController.xib */,
+				22544C18157C305700507BC4 /* PARPlaceDetailViewController.h */,
+				22544C19157C305700507BC4 /* PARPlaceDetailViewController.m */,
+				22544C1A157C305700507BC4 /* PARPlaceDetailViewController.xib */,
+				22544C1D157C318B00507BC4 /* PARPlaceListContainerController.h */,
+				22544C1E157C318C00507BC4 /* PARPlaceListContainerController.m */,
 			);
 			path = PlaceListController;
 			sourceTree = "<group>";
@@ -671,6 +684,7 @@
 				2232BBFD157B5D2E00F8E847 /* JJPickerView.xib in Resources */,
 				2232BC01157B5F9600F8E847 /* Localizable.strings in Resources */,
 				22544C08157B99D500507BC4 /* PARInitialLoadingViewController.xib in Resources */,
+				22544C1C157C305700507BC4 /* PARPlaceDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +751,8 @@
 				2232BBFC157B5D2E00F8E847 /* JJPickerView.m in Sources */,
 				22544C01157B66EB00507BC4 /* PARMainContainerController.m in Sources */,
 				22544C07157B99D500507BC4 /* PARInitialLoadingViewController.m in Sources */,
+				22544C1B157C305700507BC4 /* PARPlaceDetailViewController.m in Sources */,
+				22544C1F157C318C00507BC4 /* PARPlaceListContainerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -159,6 +159,7 @@
             self.placeListController.placeList = places;
             self.arViewController.placeList = places;
         }else{
+#warning add eror handler code here
             DebugLog(@"place search error %@", error);
         }
     }context:self];

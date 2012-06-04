@@ -16,15 +16,17 @@
 @implementation PARPlaceListViewController
 
 @synthesize placeList = _placeList;
+@synthesize tableView = _tableView;
 
 -(void)dealloc{
     self.placeList = nil;
+    self.tableView = nil;
     [super dealloc];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -45,6 +47,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.tableView = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

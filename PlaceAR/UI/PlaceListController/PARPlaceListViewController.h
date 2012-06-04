@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PARPlaceListViewController : UITableViewController
+@interface PARPlaceListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) NSArray* placeList;
+@property (nonatomic, retain) IBOutlet UITableView* tableView;
 
 @end
