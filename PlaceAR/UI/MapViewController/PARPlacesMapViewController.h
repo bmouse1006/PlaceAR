@@ -1,5 +1,5 @@
 //
-//  PARPlaceListContainerController.h
+//  PARPlacesMapViewController.h
 //  PlaceAR
 //
 //  Created by 金 津 on 12-6-4.
@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface PARPlaceListContainerController : UIViewController
+@interface PARPlacesMapViewController : UIViewController <MKMapViewDelegate>
 
 @property (nonatomic, retain) NSArray* placeList;
+
+@property (nonatomic, retain) IBOutlet MKMapView* mapView;
 
 @end

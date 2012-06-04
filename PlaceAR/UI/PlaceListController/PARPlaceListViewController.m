@@ -8,8 +8,11 @@
 
 #import "PARPlaceListViewController.h"
 #import "GooglePlaceClient.h"
+#import "PARPlaceDetailViewController.h"
 
 @interface PARPlaceListViewController ()
+
+@property (nonatomic, retain) NSIndexPath* selectedIndex;
 
 @end
 
@@ -17,10 +20,12 @@
 
 @synthesize placeList = _placeList;
 @synthesize tableView = _tableView;
+@synthesize selectedIndex = _selectedIndex;
 
 -(void)dealloc{
     self.placeList = nil;
     self.tableView = nil;
+    self.selectedIndex = nil;
     [super dealloc];
 }
 
@@ -36,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self.tableView reloadData];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -55,6 +60,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = NO;
+    [self.tableView deselectRowAtIndexPath:self.selectedIndex animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -82,7 +88,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     // Configure the cell...
     
@@ -97,7 +104,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    self.selectedIndex = indexPath;
+    GPSearchResult* place = [self.placeList objectAtIndex:indexPath.row
+                             ];
+    PARPlaceDetailViewController* detailViewController = [[[PARPlaceDetailViewController alloc] initWithNibName:@"PARPlaceDetailViewController" bundle:nil] autorelease];
+    detailViewController.place = place;
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 #pragma mark - getter/setter

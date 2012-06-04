@@ -10,12 +10,12 @@
 #import <CoreLocation/CoreLocation.h>
 #import "BRTopContainer.h"
 #import "PARARViewController.h"
-#import "PARPlaceListViewController.h"
+#import "PARPlaceNavigationController.h"
 #import "PARInitialLoadingViewController.h"
 
 @interface PARMainContainerController : BRTopContainer<CLLocationManagerDelegate>
 
-@property (nonatomic, retain) IBOutlet PARPlaceListViewController* placeListController;
+@property (nonatomic, retain) IBOutlet PARPlaceNavigationController* placeNavigator;
 @property (nonatomic, retain) IBOutlet PARARViewController* arViewController;
 @property (nonatomic, retain) IBOutlet PARInitialLoadingViewController* loadingViewController;
 

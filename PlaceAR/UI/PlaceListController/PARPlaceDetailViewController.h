@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GooglePlaceClient.h"
 
 @interface PARPlaceDetailViewController : UIViewController
+
+@property (nonatomic, retain) GPSearchResult* place;
 
 @end

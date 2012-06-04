@@ -7,6 +7,7 @@
 //
 
 #import "PARMainContainerController.h"
+#import "PARInitialLoadingViewController.h"
 #import "GooglePlaceClient.h"
 #import "BaseActivityLabel.h"
 #import <CoreMotion/CoreMotion.h>
@@ -33,7 +34,7 @@
 
 @implementation PARMainContainerController
 
-@synthesize placeListController = _placeListController;
+@synthesize placeNavigator = _placeNavigator;
 @synthesize arViewController = _arViewController;
 @synthesize locationManager = _locationManager;
 @synthesize motionManager = _motionManager;
@@ -51,7 +52,7 @@
 }
 
 -(void)dealloc{
-    self.placeListController = nil;
+    self.placeNavigator = nil;
     self.arViewController = nil;
     self.motionManager = nil;
     self.locationManager = nil;
@@ -79,16 +80,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.placeListController = [[[PARPlaceListViewController alloc] initWithNibName:@"PARPlaceListViewController" bundle:nil] autorelease];
+    self.placeNavigator = [[[PARPlaceNavigationController alloc] init] autorelease];
     self.arViewController = [[[PARARViewController alloc] initWithNibName:@"PARARViewController" bundle:nil] autorelease];
+    self.loadingViewController = [[[PARInitialLoadingViewController alloc] initWithNibName:@"PARInitialLoadingViewController" bundle:nil] autorelease];
     self.motionManager = [[[CMMotionManager alloc] init] autorelease];
     self.locationManager = [[[CLLocationManager alloc] init] autorelease];
     self.locationManager.delegate = self;
-//    
-//    if (!self.placeList){
-//        self.currentViewController = self.loadingViewController;
-//    }
-    self.currentViewController = self.placeListController;
+    
+    [self addToTop:self.loadingViewController animated:NO];
+    
+    self.currentViewController = self.placeNavigator;
     
     if (self.placeList == nil){
         //get POI list
@@ -108,16 +109,17 @@
         DebugLog(@"x = %.2f, y = %.2f, z = %.2f", motion.gravity.x, motion.gravity.y, motion.gravity.z);
         if (_loadingPlace){
             return;
-        }
-        if (motion.gravity.z < 0.4 && motion.gravity.z > -0.4){
-            //switch to AR view
-            blockSelf.currentViewController = blockSelf.arViewController;
         }else{
-            //swith to list/map view
-            blockSelf.currentViewController = blockSelf.placeListController;
+            if (motion.gravity.z < 0.4 && motion.gravity.z > -0.4){
+                //switch to AR view
+                blockSelf.currentViewController = blockSelf.arViewController;
+            }else{
+                //swith to list/map view
+                blockSelf.currentViewController = blockSelf.placeNavigator;
+            }
+            
+            [blockSelf switchViewController];
         }
-        
-        [blockSelf switchViewController];
     }];
 }
 
@@ -132,7 +134,7 @@
     [super viewDidUnload];
     [self.motionManager stopDeviceMotionUpdates];
     [self.locationManager stopUpdatingLocation];
-    self.placeListController = nil;
+    self.placeNavigator = nil;
     self.arViewController = nil;
     self.activityLabel = nil;
     // Release any retained subviews of the main view.
@@ -153,11 +155,12 @@
 -(void)getPOIList:(NSString*)type{
     [self.gpClient searchPlacesWithLocation:self.currentLocation.coordinate keyword:nil name:nil types:[NSArray arrayWithObject:type] radius:5000 completionHandler:^(NSArray* places, NSError* error){
         if (!error){
-            _loadingPlace = NO;
+            DebugLog(@"count of places is %d", [places count]);
             self.activityLabel.message = NSLocalizedString(@"message_done", nil);
             [self.activityLabel setFinished:YES];
-            self.placeListController.placeList = places;
+            self.placeNavigator.placeList = places;
             self.arViewController.placeList = places;
+            _loadingPlace = NO;
         }else{
 #warning add eror handler code here
             DebugLog(@"place search error %@", error);

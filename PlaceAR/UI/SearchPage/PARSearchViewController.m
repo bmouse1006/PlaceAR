@@ -1,25 +1,18 @@
 //
-//  PARPlaceDetailViewController.m
+//  PARSearchViewController.m
 //  PlaceAR
 //
-//  Created by 金 津 on 12-6-4.
+//  Created by 金 津 on 12-6-5.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "PARPlaceDetailViewController.h"
+#import "PARSearchViewController.h"
 
-@interface PARPlaceDetailViewController ()
+@interface PARSearchViewController ()
 
 @end
 
-@implementation PARPlaceDetailViewController
-
-@synthesize place = _place;
-
--(void)dealloc{
-    self.place = nil;
-    [super dealloc];
-}
+@implementation PARSearchViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
