@@ -13,8 +13,10 @@
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
 
+#define kSearchingParamters @"PAR_kSearchingParamters"
+
 @interface PARMainContainerController (){
-    BOOL _loadingPlace;
+    BOOL _searchingPlace;
 }
 
 @property (nonatomic, retain) CLLocationManager* locationManager;
@@ -94,31 +96,24 @@
     
     self.currentViewController = self.placeNavigator;
     
-    if (self.placeList == nil){
-        //get POI list
-//        _loadingPlace = YES;
-//        self.activityLabel = [BaseActivityLabel loadFromBundle];
-//        self.activityLabel.message = NSLocalizedString(@"message_fetchlocation", nil);
-//        [self.activityLabel show];
-//        [self.locationManager startUpdatingLocation];
-        //show search UI
-        
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //show search UI if place list is nil;
-    if (self.placeList == nil){
+    if ([[self lastSearchingParameters] count] == 0){
         //search UI
         [self.searchController show];
+        _searchingPlace = YES;
+    }else if (self.placeList == nil){
+        //start search
+        [self startSearchingProcessWithParameters:[self lastSearchingParameters]];
     }
     //start motion update
     [self.motionManager setDeviceMotionUpdateInterval:1];
     __block typeof(self) blockSelf = self;
     [self.motionManager startDeviceMotionUpdatesToQueue:self.motionUpdateQueue withHandler:^(CMDeviceMotion* motion, NSError* error){
-        DebugLog(@"x = %.2f, y = %.2f, z = %.2f", motion.gravity.x, motion.gravity.y, motion.gravity.z);
-        if (_loadingPlace){
+        if (_searchingPlace == YES){
             return;
         }else{
             if (motion.gravity.z < 0.4 && motion.gravity.z > -0.4){
@@ -165,19 +160,49 @@
     });
 }
 
--(void)getPOIList:(NSString*)type{
-    [self.gpClient searchPlacesWithLocation:self.currentLocation.coordinate keyword:nil name:nil types:[NSArray arrayWithObject:type] radius:5000 completionHandler:^(NSArray* places, NSError* error){
+-(void)getPOIList:(NSDictionary*)parameters{
+    NSString* name = [parameters objectForKey:@"name"];
+    NSString* keyword = [parameters objectForKey:@"keyword"];
+    NSArray* types = [parameters objectForKey:@"types"];
+    [self.gpClient searchPlacesWithLocation:self.currentLocation.coordinate keyword:keyword name:name types:types radius:5000 completionHandler:^(NSArray* places, NSError* error){
         if (!error){
             self.activityLabel.message = NSLocalizedString(@"message_done", nil);
             [self.activityLabel setFinished:YES];
             self.placeNavigator.placeList = places;
             self.arViewController.placeList = places;
-            _loadingPlace = NO;
+            _searchingPlace = NO;
         }else{
 #warning add eror handler code here
             DebugLog(@"place search error %@", error);
         }
     }context:self];
+    
+    [self saveSearchingParameters:parameters];
+}
+
+#pragma mark - notification call back
+-(void)receiveStartSearchingNotification:(NSNotification*)notificaiton{
+    [self startSearchingProcessWithParameters:[notificaiton.userInfo objectForKey:@"paramters"]];
+}
+
+#pragma mark - searching methods
+-(void)startSearchingProcessWithParameters:(NSDictionary*)parameters{
+    _searchingPlace = YES;
+    [self saveSearchingParameters:parameters];
+    self.activityLabel = [BaseActivityLabel loadFromBundle];
+    self.activityLabel.message = NSLocalizedString(@"message_fetchlocation", nil);
+    [self.activityLabel show];
+    [self.locationManager startUpdatingLocation];
+}
+
+#pragma mark - access searching parameters
+-(NSDictionary*)lastSearchingParameters{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kSearchingParamters];
+}
+
+-(void)saveSearchingParameters:(NSDictionary*)parameters{
+    [[NSUserDefaults standardUserDefaults] setObject:parameters forKey:kSearchingParamters];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - delegate of location manger
@@ -185,7 +210,7 @@
     self.currentLocation = newLocation;
     [manager stopUpdatingLocation];
     self.activityLabel.message = NSLocalizedString(@"message_fetchplaces", nil);
-    [self getPOIList:@"atm"];
+    [self getPOIList:[self lastSearchingParameters]];
 }
 
 @end

@@ -46,6 +46,9 @@
     // e.g. self.myOutlet = nil;
 }
 
+#pragma mark - search bar and search display delegate
+
+#pragma mark - view appearence
 -(void)statusBarStatusChanged:(NSNotification*)notification{
     CGRect frame = [[notification.userInfo objectForKey:UIApplicationStatusBarFrameUserInfoKey] CGRectValue];
     frame.origin.y += 20.0f;
@@ -63,12 +66,12 @@
     frame.origin.y = -frame.size.height;
     self.mainContent.frame = frame;
     
-    [UIView animateWithDuration:0.4f animations:^{
+    [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
         self.deemBackground.alpha = 1.0f;
         CGRect frame = self.mainContent.frame;
         frame.origin.y = ([UIApplication sharedApplication].statusBarHidden)?0.0f:20.0f;
         self.mainContent.frame = frame;
-    }completion:NULL];
+    } completion:NULL];
 }
 
 @end
