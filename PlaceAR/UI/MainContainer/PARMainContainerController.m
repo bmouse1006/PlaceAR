@@ -166,6 +166,7 @@
     NSString* name = [parameters objectForKey:@"name"];
     NSString* keyword = [parameters objectForKey:@"keyword"];
     NSArray* types = [parameters objectForKey:@"types"];
+    self.activityLabel.message = NSLocalizedString(@"message_fetchplaces", nil);
     [self.gpClient searchPlacesWithLocation:self.currentLocation.coordinate keyword:keyword name:name types:types radius:5000 completionHandler:^(NSArray* places, NSError* error){
         if (!error){
             self.activityLabel.message = NSLocalizedString(@"message_done", nil);
@@ -176,6 +177,8 @@
         }else{
 #warning add eror handler code here
             DebugLog(@"place search error %@", error);
+            self.activityLabel.message = NSLocalizedString(@"message_falied", nil);
+            [self.activityLabel setFinished:NO];
         }
     }context:self];
     
