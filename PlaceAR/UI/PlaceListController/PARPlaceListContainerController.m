@@ -108,7 +108,7 @@ static double transationDuration = 0.4f;
 }
 
 -(void)showSearchPage:(id)sender{
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOWSEARCHPAGE object:nil];
 }
 
 @end

@@ -7,8 +7,9 @@
 		<string>living_services</string>
 		<key>types</key>
 		<array>
-			<string>bakery</string>
+			<string>atm</string>
 			<string>bank</string>
+			<string>bakery</string>
 			<string>bus_station</string>
 			<string>car_rental</string>
 			<string>car_repair</string>
@@ -111,7 +112,6 @@
 		<key>types</key>
 		<array>
 			<string>airport</string>
-			<string>atm</string>
 			<string>cemetery</string>
 			<string>city_hall</string>
 			<string>courthouse</string>

@@ -78,6 +78,7 @@
         self.motionUpdateQueue = [[[NSOperationQueue alloc] init] autorelease];
         self.gpClient = [GooglePlaceClient sharedClient];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveStartSearchingNotification:) name:NOTIFICATION_STARTSEARCHING object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveShowSearchPageNotification:) name:NOTIFICATION_SHOWSEARCHPAGE object:nil];
     }
     return self;
 }
@@ -187,7 +188,11 @@
 
 #pragma mark - notification call back
 -(void)receiveStartSearchingNotification:(NSNotification*)notificaiton{
-    [self startSearchingProcessWithParameters:[notificaiton.userInfo objectForKey:@"paramters"]];
+    [self startSearchingProcessWithParameters:[notificaiton.userInfo objectForKey:@"parameters"]];
+}
+
+-(void)receiveShowSearchPageNotification:(NSNotificationCenter*)notification{
+    [self.searchController show];
 }
 
 #pragma mark - searching methods
