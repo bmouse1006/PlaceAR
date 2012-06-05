@@ -1,0 +1,117 @@
+/* 
+  GooglePlace.strings
+  PlaceAR
+
+  Created by 金 津 on 12-6-5.
+  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+*/
+
+"accounting" = "会计";
+"bicycle_store" = "自行车商店";
+"car_dealer" = "汽车经销商";
+"finance" = "金融";
+"general_contractor" = "承包商";
+"insurance_agency" = "保险代理";
+"lawyer" = "律师";
+"liquor_store" = "酒品店";
+"lodging" = "住宿";
+"moving_company" = "搬家公司";
+"pet_store" = "宠物店";
+"real_estate_agency" = "地产中介";
+"restaurant" = "餐厅";
+"roofing_contractor" = "屋顶承包商";
+"storage" = "仓库";
+"travel_agency" = "旅行社";
+"veterinary_care" = "兽医护理";
+
+"airport" = "机场";
+"atm" = "ATM";
+"cemetery" = "墓地";
+"city_hall" = "大会堂";
+"courthouse" = "法院";
+"embassy" = "大使馆";
+"fire_station" = "消防站";
+"funeral_home" = "殡仪馆";
+"gas_station" = "加油站";
+"hospital" = "医院";
+"library" = "图书馆";
+"local_government_office" = "当地政府办公室";
+"museum" = "博物馆";
+"park" = "公园";
+"police" = "警察";
+"post_office" = "邮局";
+"rv_park" = "RV公园";
+"school" = "学校";
+"subway_station" = "地铁站";
+"taxi_stand" = "出租车站";
+"train_station" = "火车站";
+"university" = "大学";
+
+"amusement_park" = "游乐园";
+"aquarium" = "水族馆";
+"art_gallery" = "艺术画廊";
+"bar" = "酒吧";
+"beauty_salon" = "美容沙龙";
+"cafe" = "咖啡馆";
+"campground" = "露营地";
+"casino" = "赌场";
+"movie_theater" = "电影院";
+"night_club" = "夜店";
+"painter" = "画家";
+"spa" = "SPA";
+"zoo" = "动物园";
+
+"bakery" = "面包店";
+"bank" = "银行";
+"bus_station" = "公交车站";
+"car_rental" = "汽车出租";
+"car_repair" = "汽车修理";
+"car_wash" = "洗车";
+"convenience_store" = "便利店";
+"dentist" = "牙医";
+"doctor" = "医生";
+"electrician" = "电工";
+"florist" = "花匠";
+"food" = "饮食";
+"grocery_or_supermarket" = "超市";
+"hair_care" = "美发";
+"hardware_store" = "五金店";
+"laundry" = "洗衣店";
+"locksmith" = "锁匠";
+"meal_delivery" = "送饭";
+"meal_takeaway" = "外卖";
+"movie_rental" = "电影租赁";
+"parking" = "停车场";
+"pharmacy" = "药房";
+"plumber" = "水管工";
+
+"book_store" = "书店";
+"clothing_store" = "服装店";
+"department_store" = "百货商店";
+"electronics_store" = "电子商店";
+"furniture_store" = "家具店";
+"home_goods_store" = "家具用品店";
+"jewelry_store" = "珠宝店";
+"shoe_store" = "鞋店";
+"shopping_mall" = "商场";
+"store" = "商店";
+
+"bowling_alley" = "保龄球馆";
+"gym" = "健身房";
+"health" = "健康中心";
+"physiotherapist" = "物理治疗师";
+"stadium" = "体育场";
+
+"church" = "教堂";
+"hindu_temple" = "印度教寺庙";
+"mosque" = "清真寺";
+"place_of_worship" = "崇拜地点";
+"synagogue" = "犹太教堂";
+
+"commercial_facilities" = "商业机构";
+"public_facilities" = "公共设施";
+"recreation" = "休闲娱乐";
+"living_services" = "生活服务";
+"shopping" = "购物";
+"sports_and_fitness" = "运动健身";
+"religious_institutions" = "宗教设施";

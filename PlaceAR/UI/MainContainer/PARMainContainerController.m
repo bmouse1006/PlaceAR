@@ -55,6 +55,7 @@
 }
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.placeNavigator = nil;
     self.arViewController = nil;
     self.motionManager = nil;
@@ -76,6 +77,7 @@
         // Custom initialization
         self.motionUpdateQueue = [[[NSOperationQueue alloc] init] autorelease];
         self.gpClient = [GooglePlaceClient sharedClient];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveStartSearchingNotification:) name:NOTIFICATION_STARTSEARCHING object:nil];
     }
     return self;
 }

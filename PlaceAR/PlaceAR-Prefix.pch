@@ -18,3 +18,5 @@
 #else
 #define DebugLog( s, ... ) 
 #endif
+
+#define NOTIFICATION_STARTSEARCHING @"NOTIFICATION_STARTSEARCHING"

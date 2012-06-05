@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PARSearchViewController : UIViewController<UISearchBarDelegate, UISearchDisplayDelegate>
+@interface PARSearchViewController : UIViewController<UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) IBOutlet UIView* mainContent;
 @property (nonatomic, retain) IBOutlet UIView* deemBackground;

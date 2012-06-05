@@ -23,6 +23,8 @@
 		2232BBFC157B5D2E00F8E847 /* JJPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2232BBF0157B5D2E00F8E847 /* JJPickerView.m */; };
 		2232BBFD157B5D2E00F8E847 /* JJPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2232BBF1157B5D2E00F8E847 /* JJPickerView.xib */; };
 		2232BC01157B5F9600F8E847 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2232BC03157B5F9600F8E847 /* Localizable.strings */; };
+		2249B33F157E383E00552762 /* GooglePlaceTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2249B33E157E383E00552762 /* GooglePlaceTypes.plist */; };
+		2249B347157E53AD00552762 /* GooglePlace.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2249B349157E53AD00552762 /* GooglePlace.strings */; };
 		22544C01157B66EB00507BC4 /* PARMainContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22544BFF157B66EB00507BC4 /* PARMainContainerController.m */; };
 		22544C07157B99D500507BC4 /* PARInitialLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22544C05157B99D500507BC4 /* PARInitialLoadingViewController.m */; };
 		22544C08157B99D500507BC4 /* PARInitialLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22544C06157B99D500507BC4 /* PARInitialLoadingViewController.xib */; };
@@ -129,6 +131,9 @@
 		2232BBF1157B5D2E00F8E847 /* JJPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJPickerView.xib; sourceTree = "<group>"; };
 		2232BC02157B5F9600F8E847 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2232BC07157B5FA100F8E847 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2249B33E157E383E00552762 /* GooglePlaceTypes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GooglePlaceTypes.plist; sourceTree = "<group>"; };
+		2249B348157E53AD00552762 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GooglePlace.strings; sourceTree = "<group>"; };
+		2249B34A157E53B300552762 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GooglePlace.strings"; sourceTree = "<group>"; };
 		22544BFF157B66EB00507BC4 /* PARMainContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARMainContainerController.m; sourceTree = "<group>"; };
 		22544C04157B99D500507BC4 /* PARInitialLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARInitialLoadingViewController.h; sourceTree = "<group>"; };
 		22544C05157B99D500507BC4 /* PARInitialLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARInitialLoadingViewController.m; sourceTree = "<group>"; };
@@ -437,8 +442,10 @@
 			isa = PBXGroup;
 			children = (
 				226B1934157902C300D04163 /* CLLocationAddtion */,
+				2249B349157E53AD00552762 /* GooglePlace.strings */,
 				2232BBDB157B5C6700F8E847 /* GooglePlaceClient.h */,
 				2232BBDC157B5C6700F8E847 /* GooglePlaceClient.m */,
+				2249B33E157E383E00552762 /* GooglePlaceTypes.plist */,
 				226B1939157902C300D04163 /* GPDetailResult.h */,
 				226B193A157902C300D04163 /* GPDetailResult.m */,
 				226B193B157902C300D04163 /* GPEvent.h */,
@@ -725,6 +732,8 @@
 				22544C1C157C305700507BC4 /* PARPlaceDetailViewController.xib in Resources */,
 				22544C26157CDB9A00507BC4 /* PARPlacesMapViewController.xib in Resources */,
 				22544C34157D156000507BC4 /* PARSearchViewController.xib in Resources */,
+				2249B33F157E383E00552762 /* GooglePlaceTypes.plist in Resources */,
+				2249B347157E53AD00552762 /* GooglePlace.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +819,15 @@
 				2232BC07157B5FA100F8E847 /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		2249B349157E53AD00552762 /* GooglePlace.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2249B348157E53AD00552762 /* en */,
+				2249B34A157E53B300552762 /* zh-Hans */,
+			);
+			name = GooglePlace.strings;
 			sourceTree = "<group>";
 		};
 		226B191E1578FE4200D04163 /* InfoPlist.strings */ = {

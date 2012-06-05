@@ -93,6 +93,11 @@ typedef enum{
     return self;
 }
 
++(NSArray*)googlePlaceTypeList{
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"GooglePlaceTypes" ofType:@"plist"];
+    return [NSArray arrayWithContentsOfFile:filePath];
+}
+
 +(NSString*)currentLanguage{
     NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];  
     NSArray* languages = [defs objectForKey:@"AppleLanguages"];  
