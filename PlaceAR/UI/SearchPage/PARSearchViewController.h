@@ -10,4 +10,9 @@
 
 @interface PARSearchViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UIView* mainContent;
+@property (nonatomic, retain) IBOutlet UIView* deemBackground;
+
+-(void)show;
+
 @end

@@ -12,11 +12,13 @@
 #import "PARARViewController.h"
 #import "PARPlaceNavigationController.h"
 #import "PARInitialLoadingViewController.h"
+#import "PARSearchViewController.h"
 
 @interface PARMainContainerController : BRTopContainer<CLLocationManagerDelegate>
 
 @property (nonatomic, retain) IBOutlet PARPlaceNavigationController* placeNavigator;
 @property (nonatomic, retain) IBOutlet PARARViewController* arViewController;
 @property (nonatomic, retain) IBOutlet PARInitialLoadingViewController* loadingViewController;
+@property (nonatomic, retain) IBOutlet PARSearchViewController* searchController;
 
 @end

@@ -45,6 +45,7 @@
 @synthesize activityLabel = _activityLabel;
 @synthesize currentLocation = _currentLocation;
 @synthesize loadingViewController = _loadingViewController;
+@synthesize searchController = _searchController;
 
 +(void)initialize{
     [super initialize];
@@ -62,6 +63,7 @@
     self.activityLabel = nil;
     self.currentLocation = nil;
     self.loadingViewController = nil;
+    self.searchController = nil;
     [super dealloc];
 }
 
@@ -83,6 +85,7 @@
     self.placeNavigator = [[[PARPlaceNavigationController alloc] init] autorelease];
     self.arViewController = [[[PARARViewController alloc] initWithNibName:@"PARARViewController" bundle:nil] autorelease];
     self.loadingViewController = [[[PARInitialLoadingViewController alloc] initWithNibName:@"PARInitialLoadingViewController" bundle:nil] autorelease];
+    self.searchController = [[[PARSearchViewController alloc] initWithNibName:@"PARSearchViewController" bundle:nil] autorelease];
     self.motionManager = [[[CMMotionManager alloc] init] autorelease];
     self.locationManager = [[[CLLocationManager alloc] init] autorelease];
     self.locationManager.delegate = self;
@@ -93,16 +96,24 @@
     
     if (self.placeList == nil){
         //get POI list
-        _loadingPlace = YES;
-        self.activityLabel = [BaseActivityLabel loadFromBundle];
-        self.activityLabel.message = NSLocalizedString(@"message_fetchlocation", nil);
-        [self.activityLabel show];
-        [self.locationManager startUpdatingLocation];
+//        _loadingPlace = YES;
+//        self.activityLabel = [BaseActivityLabel loadFromBundle];
+//        self.activityLabel.message = NSLocalizedString(@"message_fetchlocation", nil);
+//        [self.activityLabel show];
+//        [self.locationManager startUpdatingLocation];
+        //show search UI
+        
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    //show search UI if place list is nil;
+    if (self.placeList == nil){
+        //search UI
+        [self.searchController show];
+    }
+    //start motion update
     [self.motionManager setDeviceMotionUpdateInterval:1];
     __block typeof(self) blockSelf = self;
     [self.motionManager startDeviceMotionUpdatesToQueue:self.motionUpdateQueue withHandler:^(CMDeviceMotion* motion, NSError* error){
@@ -136,6 +147,8 @@
     [self.locationManager stopUpdatingLocation];
     self.placeNavigator = nil;
     self.arViewController = nil;
+    self.searchController = nil;
+    self.loadingViewController = nil;
     self.activityLabel = nil;
     // Release any retained subviews of the main view.
 }
@@ -155,7 +168,6 @@
 -(void)getPOIList:(NSString*)type{
     [self.gpClient searchPlacesWithLocation:self.currentLocation.coordinate keyword:nil name:nil types:[NSArray arrayWithObject:type] radius:5000 completionHandler:^(NSArray* places, NSError* error){
         if (!error){
-            DebugLog(@"count of places is %d", [places count]);
             self.activityLabel.message = NSLocalizedString(@"message_done", nil);
             [self.activityLabel setFinished:YES];
             self.placeNavigator.placeList = places;
@@ -173,7 +185,7 @@
     self.currentLocation = newLocation;
     [manager stopUpdatingLocation];
     self.activityLabel.message = NSLocalizedString(@"message_fetchplaces", nil);
-    [self getPOIList:@"food"];
+    [self getPOIList:@"atm"];
 }
 
 @end
