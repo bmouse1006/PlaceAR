@@ -163,29 +163,15 @@
     });
 }
 
--(void)getPOIList:(NSDictionary*)parameters{
-    NSString* name = [parameters objectForKey:@"name"];
-    NSString* keyword = [parameters objectForKey:@"keyword"];
-    NSArray* types = [parameters objectForKey:@"types"];
-    self.activityLabel.message = NSLocalizedString(@"message_fetchplaces", nil);
-    [self.gpClient searchPlacesWithLocation:self.currentLocation.coordinate keyword:keyword name:name types:types radius:5000 completionHandler:^(NSArray* places, NSError* error){
-        if (!error){
-            self.activityLabel.message = NSLocalizedString(@"message_done", nil);
-            [self.activityLabel setFinished:YES];
-            self.placeNavigator.placeList = places;
-            self.arViewController.placeList = places;
-            _searchingPlace = NO;
-        }else{
-#warning add eror handler code here
-            DebugLog(@"place search error %@", error);
-            self.activityLabel.message = NSLocalizedString(@"message_falied", nil);
-            [self.activityLabel setFinished:NO];
-        }
-    }context:self];
-    
-    [self saveSearchingParameters:parameters];
+#pragma mark - setter
+-(void)setPlaceList:(NSArray *)placeList{
+    if (_placeList != placeList){
+        [_placeList release];
+        _placeList = [placeList retain];
+        self.placeNavigator.placeList = placeList;
+        self.arViewController.placeList = placeList;
+    }
 }
-
 #pragma mark - notification call back
 -(void)receiveStartSearchingNotification:(NSNotification*)notificaiton{
     [self startSearchingProcessWithParameters:[notificaiton.userInfo objectForKey:@"parameters"]];
@@ -203,6 +189,31 @@
     self.activityLabel.message = NSLocalizedString(@"message_fetchlocation", nil);
     [self.activityLabel show];
     [self.locationManager startUpdatingLocation];
+}
+
+-(void)getPOIList:(NSDictionary*)parameters{
+    NSString* name = [parameters objectForKey:@"name"];
+    NSString* keyword = [parameters objectForKey:@"keyword"];
+    NSArray* types = [parameters objectForKey:@"types"];
+    self.activityLabel.message = NSLocalizedString(@"message_fetchplaces", nil);
+    [self.gpClient searchPlacesWithLocation:self.currentLocation.coordinate keyword:keyword name:name types:types radius:5000 completionHandler:^(NSArray* places, NSError* error){
+        if (!error){
+            self.activityLabel.message = NSLocalizedString(@"message_done", nil);
+            [self.activityLabel setFinished:YES];
+            self.placeList = places;
+            _searchingPlace = NO;
+        }else{
+#warning add eror handler code here
+            DebugLog(@"place search error %@", error);
+            self.activityLabel.message = NSLocalizedString(@"message_falied", nil);
+            [self.activityLabel setFinished:NO];
+            if (!self.placeList){
+                [self.searchController show];
+            }
+        }
+    }context:self];
+    
+    [self saveSearchingParameters:parameters];
 }
 
 #pragma mark - access searching parameters

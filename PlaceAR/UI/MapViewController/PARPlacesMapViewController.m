@@ -9,6 +9,7 @@
 #import "PARPlacesMapViewController.h"
 #import "PARPlaceDetailViewController.h"
 #import "PARPlaceAnnotation.h"
+#import "JJImageView.h"
 
 @interface PARPlacesMapViewController ()
 
@@ -97,8 +98,12 @@
         view.pinColor = MKPinAnnotationColorGreen;
         view.canShowCallout = YES;
         view.animatesDrop = YES;
-        view.rightCalloutAccessoryView = [[[UIControl alloc] initWithFrame:CGRectMake(0, 0, 20, 20)] autorelease];
-        view.rightCalloutAccessoryView.backgroundColor = [UIColor blueColor];
+        view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        JJImageView* imageView = [[[JJImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)] autorelease];
+        imageView.imageURL = [NSURL URLWithString:((PARPlaceAnnotation*)annotation).place.icon];
+        imageView.backgroundColor = [UIColor clearColor];
+        view.leftCalloutAccessoryView = imageView;
+        
         return view;
     }
 }
@@ -107,6 +112,7 @@
     MKAnnotationView* view = [views lastObject];
     if (view.annotation != self.mapView.userLocation){
         [self.mapView setVisibleMapRect:[self mapRectForAnnotations:self.annotationList]];
+        [view setSelected:YES animated:YES];
     }
 }
 

@@ -13,6 +13,8 @@
 @property (nonatomic, retain) IBOutlet UIView* mainContent;
 @property (nonatomic, retain) IBOutlet UIView* deemBackground;
 
+@property (nonatomic, retain) IBOutlet UISearchBar* searchBar;
+
 -(void)show;
 
 @end

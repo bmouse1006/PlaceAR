@@ -8,8 +8,7 @@
 
 #import "PARSearchViewController.h"
 #import "GooglePlaceClient.h"
-
-#define kSearchHistory @"PAR_kSearchHistory"
+#import "PARSearchDisplayController.h"
 
 @interface PARSearchViewController ()
 
@@ -17,9 +16,7 @@
 @property (nonatomic, retain) NSDictionary* types;
 @property (nonatomic, retain) NSMutableArray* tableItems;
 @property (nonatomic, retain) NSMutableSet* unfoldedCategories;
-
-@property (nonatomic, retain) NSMutableArray* searchedHistoryItems;
-@property (nonatomic, retain) NSMutableArray* searchedTypeItems;
+@property (nonatomic, retain) PARSearchDisplayController* searchController;
 
 @end
 
@@ -30,8 +27,8 @@
 @synthesize unfoldedCategories = _unfoldedCategories;
 @synthesize tableItems = _tableItems;
 
-@synthesize searchedTypeItems = _searchedTypeItems;
-@synthesize searchedHistoryItems = _searchedHistoryItems;
+@synthesize searchBar = _searchBar;
+@synthesize searchController = _searchController;
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -41,8 +38,8 @@
     self.types = nil;
     self.tableItems = nil;
     self.unfoldedCategories = nil;
-    self.searchedHistoryItems = nil;
-    self.searchedTypeItems = nil;
+    self.searchBar = nil;
+    self.searchController = nil;
     [super dealloc];
 }
 
@@ -56,7 +53,6 @@
         self.tableItems = [NSMutableArray array];
         [self.tableItems addObjectsFromArray:self.categories];
         self.unfoldedCategories = [NSMutableSet set];
-        self.searchedTypeItems = [NSMutableArray array];
     }
     return self;
 }
@@ -64,7 +60,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.searchController = [[[PARSearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self] autorelease];
+
     // Do any additional setup after loading the view from its nib.
+    NSMutableArray* allTypes = [NSMutableArray array];
+    [self.categories enumerateObjectsUsingBlock:^(id item, NSUInteger idx, BOOL* stop){
+        [allTypes addObjectsFromArray:[self.types objectForKey:item]];
+    }];
+    
+    [self.searchController setAllTypes:allTypes];
 }
 
 - (void)viewDidUnload
@@ -88,16 +93,6 @@
     
     self.categories = categories;
     self.types = types;
-}
-
-#pragma init search history items
--(void)setupSearchHistoryItems{
-    NSArray* savedHistory = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchHistory];
-    if (!savedHistory){
-        self.searchedHistoryItems = [NSMutableArray arrayWithArray:savedHistory];
-    }else{
-        self.searchedHistoryItems = [NSMutableArray array];
-    }
 }
 
 #pragma mark - search bar and search display delegate
