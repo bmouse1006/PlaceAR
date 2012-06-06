@@ -9,12 +9,17 @@
 #import "PARSearchViewController.h"
 #import "GooglePlaceClient.h"
 
+#define kSearchHistory @"PAR_kSearchHistory"
+
 @interface PARSearchViewController ()
 
 @property (nonatomic, retain) NSArray* categories;
 @property (nonatomic, retain) NSDictionary* types;
 @property (nonatomic, retain) NSMutableArray* tableItems;
 @property (nonatomic, retain) NSMutableSet* unfoldedCategories;
+
+@property (nonatomic, retain) NSMutableArray* searchedHistoryItems;
+@property (nonatomic, retain) NSMutableArray* searchedTypeItems;
 
 @end
 
@@ -25,6 +30,9 @@
 @synthesize unfoldedCategories = _unfoldedCategories;
 @synthesize tableItems = _tableItems;
 
+@synthesize searchedTypeItems = _searchedTypeItems;
+@synthesize searchedHistoryItems = _searchedHistoryItems;
+
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.deemBackground = nil;
@@ -33,6 +41,8 @@
     self.types = nil;
     self.tableItems = nil;
     self.unfoldedCategories = nil;
+    self.searchedHistoryItems = nil;
+    self.searchedTypeItems = nil;
     [super dealloc];
 }
 
@@ -46,6 +56,7 @@
         self.tableItems = [NSMutableArray array];
         [self.tableItems addObjectsFromArray:self.categories];
         self.unfoldedCategories = [NSMutableSet set];
+        self.searchedTypeItems = [NSMutableArray array];
     }
     return self;
 }
@@ -77,6 +88,16 @@
     
     self.categories = categories;
     self.types = types;
+}
+
+#pragma init search history items
+-(void)setupSearchHistoryItems{
+    NSArray* savedHistory = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchHistory];
+    if (!savedHistory){
+        self.searchedHistoryItems = [NSMutableArray arrayWithArray:savedHistory];
+    }else{
+        self.searchedHistoryItems = [NSMutableArray array];
+    }
 }
 
 #pragma mark - search bar and search display delegate
