@@ -8,40 +8,22 @@
 
 #import "PARARViewController.h"
 #import "PARARPlaceContainerLayer.h"
-#import <AVFoundation/AVFoundation.h>
-#import <CoreMotion/CoreMotion.h>
-#import <CoreLocation/CoreLocation.h>
-#import <QuartzCore/QuartzCore.h>
+#import "ARView.h"
 
 @interface PARARViewController ()
 
-@property (nonatomic, retain) AVCaptureSession* captureSession;
-@property (nonatomic, assign) CADisplayLink* displayLink;
-@property (nonatomic, retain) CMMotionManager* motionManager;
-@property (nonatomic, retain) CLLocationManager* locationManager;
+@property (nonatomic, retain) ARView* arview;
 
 @end
 
 @implementation PARARViewController
 
 @synthesize placeList = _placeList;
-@synthesize captureSession = _captureSession;
-@synthesize annotationContainerView = _annotationContainerView;
-@synthesize displayLink = _displayLink;
-@synthesize motionManager = _motionManager;
-@synthesize locationManager = _locationManager;
-@synthesize realityView = _realityView;
+@synthesize arview = _arview;
 
 -(void)dealloc{
     self.placeList = nil;
-    self.captureSession = nil;
-    self.annotationContainerView = nil;
-    self.displayLink = nil;
-    [self.motionManager stopGyroUpdates];
-    [self.locationManager stopUpdatingLocation];
-    self.motionManager = nil;
-    self.locationManager = nil;
-    self.realityView = nil;
+    self.arview = nil;
     [super dealloc];
 }
 
@@ -59,78 +41,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Do any additional setup after loading the view, typically from a nib.
-    AVCaptureSession *captureSession = [[[AVCaptureSession alloc] init] autorelease];
-    AVCaptureDevice *videoCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    NSError *error = nil;
-    AVCaptureDeviceInput *videoInput = [AVCaptureDeviceInput deviceInputWithDevice:videoCaptureDevice error:&error];
-    if (videoInput){
-        [captureSession addInput:videoInput];
-    }
-    
-    AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:captureSession];
-    previewLayer.videoGravity =  AVLayerVideoGravityResizeAspectFill;
-    previewLayer.frame = self.view.bounds; // Assume you want the preview layer to fill the view.
-    [self.realityView.layer addSublayer:previewLayer];
-    self.captureSession = captureSession;
-    
-    self.motionManager = [[[CMMotionManager alloc] init] autorelease];
-    [self.motionManager startDeviceMotionUpdates];
-    
-    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
-    self.locationManager.delegate = self;
-    [self updateLocation];
-    
-    PARARPlaceContainerLayer* containerLayer = (PARARPlaceContainerLayer*)self.annotationContainerView.layer;
-    [containerLayer removeAllPlaces];
-    [containerLayer addPlaces:self.placeList];
-    
+
+    self.arview = [[[ARView alloc] initWithFrame:CGRectZero] autorelease];
+    [self.view addSubview:self.arview];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     self.view = nil;
-    self.captureSession = nil;
-    self.annotationContainerView = nil;
+    self.arview = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.arview.frame = self.view.bounds;
     [UIApplication sharedApplication].statusBarHidden = YES;
-    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update:)];
-    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-    [self.captureSession startRunning];
+    [self.arview start];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-    self.displayLink = nil;
-    [self.captureSession stopRunning];
+    [self.arview stop];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
--(void)update:(CADisplayLink*)displayLink{
-    PARARPlaceContainerLayer* containerLayer = (PARARPlaceContainerLayer*)self.annotationContainerView.layer;
-    [containerLayer updateWithMotionManager:self.motionManager timestamp:displayLink.timestamp duration:displayLink.duration];
-}
-
--(void)updateLocation{
-    [self.locationManager startUpdatingLocation];
-}
-
-#pragma mark - location manager delegate
--(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    [self.locationManager stopUpdatingLocation];
+-(void)setPlaceList:(NSArray *)placeList{
     
-    PARARPlaceContainerLayer* containerLayer = (PARARPlaceContainerLayer*)self.annotationContainerView.layer;
-    [containerLayer updateCurrentLocationWithNewLocation:newLocation];
 }
 
 @end

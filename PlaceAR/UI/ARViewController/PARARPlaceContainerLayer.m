@@ -103,22 +103,20 @@
 }
 
 -(void)updateWithMotionManager:(CMMotionManager*)motionManager timestamp:(CFTimeInterval)timestamp duration:(CFTimeInterval)duration{
+    DebugLog(@"update rotate position", nil);
     if (self.lastUpdateTimestamp == -1){
         self.lastUpdateTimestamp = timestamp;
     }else{
         //x radians change used to move vertical
-        double radiansX = motionManager.gyroData.rotationRate.x * duration;
+        double degreeX = motionManager.gyroData.rotationRate.x * duration * 180/M_PI;
         //y radians change used to move horizontal
-        double radiansY = motionManager.gyroData.rotationRate.y * duration;
+        double degreeY = motionManager.gyroData.rotationRate.y * duration * 180/M_PI;
         //z radians change used to rotate view
-        double radiansZ = motionManager.gyroData.rotationRate.z * duration;
+        double degreeZ = motionManager.gyroData.rotationRate.z * duration * 180/M_PI;
         self.lastUpdateTimestamp = timestamp;
-        
-        NSLog(@"radians x is %.2f", radiansX);
-        NSLog(@"radians y is %.2f", radiansY);
         [[self.placeLayers allValues] enumerateObjectsUsingBlock:^(PARPlaceLayer* placeLayer, NSUInteger idx, BOOL* stop){
-            placeLayer.directionHorizontal += radiansX;
-            placeLayer.directionVertical += radiansY;
+            placeLayer.directionVertical += degreeX;
+            placeLayer.directionHorizontal += degreeY;
         }];
         
         [self setNeedsLayout];
@@ -146,7 +144,7 @@
 }
 
 -(CGFloat)offsetWithDirection:(double)direction viewWidth:(CGFloat)viewWidth{
-    return viewWidth * (0.5 + tan(direction));
+    return viewWidth * (0.5 + tan(direction*M_PI/180));
 }
 
 -(NSValue*)keyForPlace:(GPSearchResult*)place{

@@ -10,6 +10,8 @@
 		221503441583659500C4015E /* PARARPlaceContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 221503431583659500C4015E /* PARARPlaceContainerView.m */; };
 		221503481583659500C4015E /* PARARPlaceContainerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 221503471583659500C4015E /* PARARPlaceContainerLayer.m */; };
 		2215034E1583659500C4015E /* PARPlaceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215034D1583659500C4015E /* PARPlaceLayer.m */; };
+		22150359158643D700C4015E /* ARView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22150358158643D600C4015E /* ARView.m */; };
+		2215035D1586494600C4015E /* PlaceOfInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215035C1586494500C4015E /* PlaceOfInterest.m */; };
 		2232BBC5157B483000F8E847 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2232BBC4157B483000F8E847 /* CoreMotion.framework */; };
 		2232BBCE157B500100F8E847 /* BRTopContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2232BBCD157B500100F8E847 /* BRTopContainer.m */; };
 		2232BBD6157B53CD00F8E847 /* UIView+util.m in Sources */ = {isa = PBXBuildFile; fileRef = 2232BBD5157B53CD00F8E847 /* UIView+util.m */; };
@@ -119,6 +121,10 @@
 		221503471583659500C4015E /* PARARPlaceContainerLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARARPlaceContainerLayer.m; sourceTree = "<group>"; };
 		2215034C1583659500C4015E /* PARPlaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARPlaceLayer.h; sourceTree = "<group>"; };
 		2215034D1583659500C4015E /* PARPlaceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARPlaceLayer.m; sourceTree = "<group>"; };
+		22150357158643D600C4015E /* ARView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARView.h; sourceTree = "<group>"; };
+		22150358158643D600C4015E /* ARView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARView.m; sourceTree = "<group>"; };
+		2215035B1586494200C4015E /* PlaceOfInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceOfInterest.h; sourceTree = "<group>"; };
+		2215035C1586494500C4015E /* PlaceOfInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceOfInterest.m; sourceTree = "<group>"; };
 		2232BBC4157B483000F8E847 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		2232BBCC157B500100F8E847 /* BRTopContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTopContainer.h; sourceTree = "<group>"; };
 		2232BBCD157B500100F8E847 /* BRTopContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRTopContainer.m; sourceTree = "<group>"; };
@@ -687,6 +693,10 @@
 		226B1A76157905FD00D04163 /* ARViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2215035B1586494200C4015E /* PlaceOfInterest.h */,
+				2215035C1586494500C4015E /* PlaceOfInterest.m */,
+				22150357158643D600C4015E /* ARView.h */,
+				22150358158643D600C4015E /* ARView.m */,
 				221503461583659500C4015E /* PARARPlaceContainerLayer.h */,
 				221503471583659500C4015E /* PARARPlaceContainerLayer.m */,
 				221503421583659500C4015E /* PARARPlaceContainerView.h */,
@@ -860,6 +870,8 @@
 				221503441583659500C4015E /* PARARPlaceContainerView.m in Sources */,
 				221503481583659500C4015E /* PARARPlaceContainerLayer.m in Sources */,
 				2215034E1583659500C4015E /* PARPlaceLayer.m in Sources */,
+				22150359158643D700C4015E /* ARView.m in Sources */,
+				2215035D1586494600C4015E /* PlaceOfInterest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

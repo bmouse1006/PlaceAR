@@ -11,9 +11,6 @@
 
 @interface PARARViewController : UIViewController<CLLocationManagerDelegate>
 
-@property (nonatomic, retain) IBOutlet UIView* annotationContainerView;
-@property (nonatomic, retain) IBOutlet UIView* realityView;
-
 @property (nonatomic, retain) NSArray* placeList;
 
 @end

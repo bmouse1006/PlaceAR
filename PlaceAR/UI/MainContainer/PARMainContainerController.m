@@ -94,7 +94,7 @@
     self.motionManager = [[[CMMotionManager alloc] init] autorelease];
     self.locationManager = [[[CLLocationManager alloc] init] autorelease];
     self.locationManager.delegate = self;
-    
+    self.locationManager.distanceFilter = 100;
     [self addToTop:self.loadingViewController animated:NO];
     
     self.currentViewController = self.placeNavigator;

@@ -95,8 +95,8 @@ static double kTransitionAnimationDuration = 0.2f;
     if (top == controller){
         return;
     }
-    [top viewWillDisappear:YES];
-    [controller viewWillAppear:YES];
+//    [top viewWillDisappear:YES];
+//    [controller viewWillAppear:YES];
     [controller willMoveToParentViewController:self];
     [self addChildViewController:controller];
     [controller didMoveToParentViewController:self];
@@ -110,8 +110,8 @@ static double kTransitionAnimationDuration = 0.2f;
             controller.view.alpha = 1.0f;
         }completion:^(BOOL finished){
             [top.view removeFromSuperview];
-            [top viewDidDisappear:YES];
-            [controller viewDidAppear:YES];
+//            [top viewDidDisappear:YES];
+//            [controller viewDidAppear:YES];
         }];
     }
 }
