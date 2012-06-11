@@ -10,6 +10,7 @@
 #import "PARARPlaceContainerLayer.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMotion/CoreMotion.h>
+#import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 
 @interface PARARViewController ()
@@ -17,6 +18,7 @@
 @property (nonatomic, retain) AVCaptureSession* captureSession;
 @property (nonatomic, assign) CADisplayLink* displayLink;
 @property (nonatomic, retain) CMMotionManager* motionManager;
+@property (nonatomic, retain) CLLocationManager* locationManager;
 
 @end
 
@@ -27,13 +29,19 @@
 @synthesize annotationContainerView = _annotationContainerView;
 @synthesize displayLink = _displayLink;
 @synthesize motionManager = _motionManager;
+@synthesize locationManager = _locationManager;
+@synthesize realityView = _realityView;
 
 -(void)dealloc{
     self.placeList = nil;
     self.captureSession = nil;
     self.annotationContainerView = nil;
     self.displayLink = nil;
+    [self.motionManager stopGyroUpdates];
+    [self.locationManager stopUpdatingLocation];
     self.motionManager = nil;
+    self.locationManager = nil;
+    self.realityView = nil;
     [super dealloc];
 }
 
@@ -62,12 +70,20 @@
     AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:captureSession];
     previewLayer.videoGravity =  AVLayerVideoGravityResizeAspectFill;
     previewLayer.frame = self.view.bounds; // Assume you want the preview layer to fill the view.
-    [self.view.layer addSublayer:previewLayer];
+    [self.realityView.layer addSublayer:previewLayer];
     self.captureSession = captureSession;
     
     self.motionManager = [[[CMMotionManager alloc] init] autorelease];
-    
     [self.motionManager startDeviceMotionUpdates];
+    
+    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+    self.locationManager.delegate = self;
+    [self updateLocation];
+    
+    PARARPlaceContainerLayer* containerLayer = (PARARPlaceContainerLayer*)self.annotationContainerView.layer;
+    [containerLayer removeAllPlaces];
+    [containerLayer addPlaces:self.placeList];
+    
 }
 
 - (void)viewDidUnload
@@ -88,9 +104,9 @@
     [self.captureSession startRunning];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.displayLink invalidate];
+    [self.displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     self.displayLink = nil;
     [self.captureSession stopRunning];
 }
@@ -101,8 +117,20 @@
 }
 
 -(void)update:(CADisplayLink*)displayLink{
-    PARARPlaceContainerLayer* containerLayer = (PARARPlaceContainerLayer*)self.view.layer;
+    PARARPlaceContainerLayer* containerLayer = (PARARPlaceContainerLayer*)self.annotationContainerView.layer;
     [containerLayer updateWithMotionManager:self.motionManager timestamp:displayLink.timestamp duration:displayLink.duration];
+}
+
+-(void)updateLocation{
+    [self.locationManager startUpdatingLocation];
+}
+
+#pragma mark - location manager delegate
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    [self.locationManager stopUpdatingLocation];
+    
+    PARARPlaceContainerLayer* containerLayer = (PARARPlaceContainerLayer*)self.annotationContainerView.layer;
+    [containerLayer updateCurrentLocationWithNewLocation:newLocation];
 }
 
 @end

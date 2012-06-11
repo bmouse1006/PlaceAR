@@ -7,11 +7,14 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <CoreLocation/CoreLocation.h>
 #import "GPSearchResult.h"
 
 @interface PARPlaceLayer : CALayer
 
 @property (nonatomic, retain) GPSearchResult* place;
+@property (nonatomic, assign) double directionVertical;
+@property (nonatomic, assign) double directionHorizontal;
 
 +(id)layerWithPlace:(GPSearchResult*)place;
 

@@ -17,7 +17,12 @@
 -(void)removePlace:(GPSearchResult*)place;
 -(void)addPlaces:(NSArray*)places;
 -(void)removePlaces:(NSArray*)places;
+-(void)removeAllPlaces;
 
 -(void)updateWithMotionManager:(CMMotionManager*)motionManager timestamp:(CFTimeInterval)timestamp duration:(CFTimeInterval)duration;
+
+-(NSArray*)visibilePlaceLayers;
+
+-(void)updateCurrentLocationWithNewLocation:(CLLocation*)newLocation;
 
 @end

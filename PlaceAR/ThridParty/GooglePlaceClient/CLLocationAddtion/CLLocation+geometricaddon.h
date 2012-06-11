@@ -11,5 +11,6 @@
 @interface CLLocation (geometricaddon)
 
 -(CLLocationDirection)directionToLocation:(const CLLocation*)location;
+-(CLLocationDirection)directionToCoordinate:(const CLLocationCoordinate2D)coordinate;
 
 @end

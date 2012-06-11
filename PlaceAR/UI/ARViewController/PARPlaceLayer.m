@@ -22,6 +22,8 @@
 @synthesize titleLayer = _titleLayer;
 @synthesize subtitleLayer = _subtitleLayer;
 @synthesize place = _place;
+@synthesize directionVertical = _directionVertical;
+@synthesize directionHorizontal = _directionHorizontal;
 
 -(id)init{
     self = [super init];
@@ -45,6 +47,9 @@
         self.borderColor = [[UIColor grayColor] colorWithAlphaComponent:0.5].CGColor;
         self.cornerRadius = 5.0f;
         self.masksToBounds = YES;
+        
+        self.directionHorizontal = 0.0f;
+        self.directionVertical = 0.0f;
     }
     
     return self;
@@ -66,20 +71,9 @@
     
     return layer;
 }
-
-//-(void)drawInContext:(CGContextRef)ctx{
-//    CGContextSaveGState(ctx);
-//    
-//    CGAffineTransform transform = CGContextGetCTM(ctx);
-//    transform = CGAffineTransformInvert(transform);
-//    CGContextConcatCTM(ctx, transform);
-//    
-//    //actual draw here
-//    
-//    
-//    CGContextRestoreGState(ctx);
-//}
+ 
 -(void)layoutSublayers{
+    [super layoutSublayers];
     CGRect frame = self.bounds;
     
     frame.size.height *= 0.5f;

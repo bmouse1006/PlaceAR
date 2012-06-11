@@ -119,7 +119,7 @@
         if (_searchingPlace == YES){
             return;
         }else{
-            if (motion.gravity.z < 0.4 && motion.gravity.z > -0.4){
+            if ((motion.gravity.z < 0.4 && motion.gravity.z > -0.4) && [CLLocationManager locationServicesEnabled]){
                 //switch to AR view
                 blockSelf.currentViewController = blockSelf.arViewController;
             }else{

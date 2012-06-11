@@ -26,6 +26,11 @@ CLLocationDegrees deltaLongitude(CLLocationCoordinate2D p1, CLLocationCoordinate
 
 @implementation CLLocation (geometricaddon)
 
+-(CLLocationDirection)directionToCoordinate:(const CLLocationCoordinate2D)coordinate{
+    CLLocation* location = [[[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0 course:0 speed:0 timestamp:nil] autorelease];
+    return [self directionToLocation:location];
+}
+
 -(CLLocationDirection)directionToLocation:(const CLLocation*)location{
     CLLocationCoordinate2D a = self.coordinate;
     CLLocationCoordinate2D b = location.coordinate;
