@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221503441583659500C4015E /* PARARPlaceContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 221503431583659500C4015E /* PARARPlaceContainerView.m */; };
+		221503481583659500C4015E /* PARARPlaceContainerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 221503471583659500C4015E /* PARARPlaceContainerLayer.m */; };
+		2215034E1583659500C4015E /* PARPlaceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215034D1583659500C4015E /* PARPlaceLayer.m */; };
 		2232BBC5157B483000F8E847 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2232BBC4157B483000F8E847 /* CoreMotion.framework */; };
 		2232BBCE157B500100F8E847 /* BRTopContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2232BBCD157B500100F8E847 /* BRTopContainer.m */; };
 		2232BBD6157B53CD00F8E847 /* UIView+util.m in Sources */ = {isa = PBXBuildFile; fileRef = 2232BBD5157B53CD00F8E847 /* UIView+util.m */; };
@@ -109,6 +112,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		221503421583659500C4015E /* PARARPlaceContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARARPlaceContainerView.h; sourceTree = "<group>"; };
+		221503431583659500C4015E /* PARARPlaceContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARARPlaceContainerView.m; sourceTree = "<group>"; };
+		221503461583659500C4015E /* PARARPlaceContainerLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARARPlaceContainerLayer.h; sourceTree = "<group>"; };
+		221503471583659500C4015E /* PARARPlaceContainerLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARARPlaceContainerLayer.m; sourceTree = "<group>"; };
+		2215034C1583659500C4015E /* PARPlaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARPlaceLayer.h; sourceTree = "<group>"; };
+		2215034D1583659500C4015E /* PARPlaceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARPlaceLayer.m; sourceTree = "<group>"; };
 		2232BBC4157B483000F8E847 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		2232BBCC157B500100F8E847 /* BRTopContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTopContainer.h; sourceTree = "<group>"; };
 		2232BBCD157B500100F8E847 /* BRTopContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRTopContainer.m; sourceTree = "<group>"; };
@@ -384,7 +393,6 @@
 		226B19061578FE4100D04163 = {
 			isa = PBXGroup;
 			children = (
-				22544C2D157D029000507BC4 /* MapKit.framework */,
 				226B191B1578FE4200D04163 /* PlaceAR */,
 				226B19141578FE4200D04163 /* Frameworks */,
 				226B19121578FE4200D04163 /* Products */,
@@ -402,6 +410,7 @@
 		226B19141578FE4200D04163 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22544C2D157D029000507BC4 /* MapKit.framework */,
 				22544C11157BA37800507BC4 /* AVFoundation.framework */,
 				226B1A5E157903AC00D04163 /* CFNetwork.framework */,
 				226B19191578FE4200D04163 /* CoreGraphics.framework */,
@@ -674,9 +683,15 @@
 		226B1A76157905FD00D04163 /* ARViewController */ = {
 			isa = PBXGroup;
 			children = (
+				221503461583659500C4015E /* PARARPlaceContainerLayer.h */,
+				221503471583659500C4015E /* PARARPlaceContainerLayer.m */,
+				221503421583659500C4015E /* PARARPlaceContainerView.h */,
+				221503431583659500C4015E /* PARARPlaceContainerView.m */,
 				226B1A7E1579073F00D04163 /* PARARViewController.h */,
 				226B1A7F1579073F00D04163 /* PARARViewController.m */,
 				226B1A801579073F00D04163 /* PARARViewController.xib */,
+				2215034C1583659500C4015E /* PARPlaceLayer.h */,
+				2215034D1583659500C4015E /* PARPlaceLayer.m */,
 			);
 			path = ARViewController;
 			sourceTree = "<group>";
@@ -838,6 +853,9 @@
 				22C7356C157F43AF00716984 /* JJImageView.m in Sources */,
 				22C73570157F441C00716984 /* JJThumbnailCache.m in Sources */,
 				22C73580157F480C00716984 /* NSString+MD5.m in Sources */,
+				221503441583659500C4015E /* PARARPlaceContainerView.m in Sources */,
+				221503481583659500C4015E /* PARARPlaceContainerLayer.m in Sources */,
+				2215034E1583659500C4015E /* PARPlaceLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,10 @@
     return [super objWithProperties:responseDictionary];
 }
 
+-(BOOL)isEqual:(GPSearchResult*)place{
+    return [self.ID isEqualToString:place.ID];
+}
+
 -(NSArray*)events{
     NSArray* rawEvents = [self.properties objectForKey:@"events"];
     NSMutableArray* events = [NSMutableArray array];
