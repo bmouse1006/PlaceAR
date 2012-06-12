@@ -99,6 +99,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 @property (nonatomic, retain) AVCaptureVideoPreviewLayer* captureLayer;
 
 @property (nonatomic, retain) NSMutableDictionary* viewsForPlaces;
+@property (nonatomic, retain) NSMutableDictionary* scaleTransforms;
 
 - (void)initialize;
 
@@ -130,6 +131,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 @synthesize captureView = _captureView, captureLayer = _captureLayer, captureSession = _captureSession;
 @synthesize places = _places;
 @synthesize viewsForPlaces = _viewsForPlaces;
+@synthesize scaleTransforms = _scaleTransforms;
 
 - (void)dealloc
 {
@@ -144,6 +146,8 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	if (placesOfInterestCoordinates != NULL) {
 		free(placesOfInterestCoordinates);
 	}
+    
+    self.scaleTransforms = nil;
 	[super dealloc];
 }
 
@@ -151,6 +155,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     [super layoutSubviews];
     NSLog(@"%@", NSStringFromCGRect(self.bounds));
     self.captureView.frame = self.bounds;
+	createProjectionMatrix(projectionTransform, 60.0f*DEGREES_TO_RADIANS, self.bounds.size.width*1.0f / self.bounds.size.height, 0.25f, 1000.0f);
 }
 
 - (void)start
@@ -191,6 +196,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 - (void)initialize
 {
     self.viewsForPlaces = [NSMutableDictionary dictionary];
+    self.scaleTransforms = [NSMutableDictionary dictionary];
     
 	self.captureView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
 	self.captureView.bounds = self.bounds;
@@ -218,9 +224,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	[self.captureView.layer addSublayer:self.captureLayer];
 	
 	// Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		[self.captureSession startRunning];
-	});
+    [self.captureSession startRunning];
 }
 
 - (void)stopCameraPreview
@@ -373,6 +377,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         UIView* view = [self.viewsForPlaces objectForKey:[self keyForPlace:poi]];
 		if (v[2] < 0.0f) {
 			view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+            view.transform = [self scaleTransformForPlace:poi];
 			view.hidden = NO;
 		} else {
 			view.hidden = YES;
@@ -411,6 +416,24 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 -(NSValue*)keyForPlace:(GPSearchResult*)place{
     return [NSValue valueWithNonretainedObject:place];
+}
+
+-(CGAffineTransform)scaleTransformForPlace:(GPSearchResult*)place{
+    NSValue* key = [self keyForPlace:place];
+    NSValue* transform = [self.scaleTransforms objectForKey:key];
+    if (transform == nil){
+        CLLocation* placeLocation = [[[CLLocation alloc] initWithLatitude:place.coordinate.latitude longitude:place.coordinate.longitude] autorelease];
+        double distance = [location distanceFromLocation:placeLocation];
+        double scale = 1;
+        if (distance > 400){
+            scale = (320/distance + 0.2);
+        }
+        transform = [NSValue valueWithCGAffineTransform:CGAffineTransformMakeScale(scale, scale)];
+        
+        [self.scaleTransforms setObject:transform forKey:key];
+    }
+    
+    return [transform CGAffineTransformValue];
 }
 
 @end

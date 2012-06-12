@@ -113,6 +113,7 @@
 		22C7356C157F43AF00716984 /* JJImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C73569157F43AF00716984 /* JJImageView.m */; };
 		22C73570157F441C00716984 /* JJThumbnailCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7356F157F441B00716984 /* JJThumbnailCache.m */; };
 		22C73580157F480C00716984 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7357F157F480C00716984 /* NSString+MD5.m */; };
+		22E2D26F15878E910060AC13 /* PARPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E2D26E15878E910060AC13 /* PARPlaceView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -305,6 +306,7 @@
 		22C7356F157F441B00716984 /* JJThumbnailCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJThumbnailCache.m; sourceTree = "<group>"; };
 		22C7357E157F480C00716984 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		22C7357F157F480C00716984 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		22E2D26E15878E910060AC13 /* PARPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PARPlaceView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -711,6 +713,7 @@
 				2215034D1583659500C4015E /* PARPlaceLayer.m */,
 				22989DA81587474100F819E3 /* PARPlaceView.h */,
 				22989DA91587474100F819E3 /* PARPlaceView.m */,
+				22E2D26E15878E910060AC13 /* PARPlaceView.xib */,
 			);
 			path = ARViewController;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 				22544C34157D156000507BC4 /* PARSearchViewController.xib in Resources */,
 				2249B33F157E383E00552762 /* GooglePlaceTypes.plist in Resources */,
 				2249B347157E53AD00552762 /* GooglePlace.strings in Resources */,
+				22E2D26F15878E910060AC13 /* PARPlaceView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

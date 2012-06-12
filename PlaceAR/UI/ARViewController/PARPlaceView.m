@@ -7,6 +7,7 @@
 //
 
 #import "PARPlaceView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PARPlaceView
 
@@ -19,12 +20,23 @@
     return self;
 }
 
+-(void)awakeFromNib{
+    [super awakeFromNib];
+    [self initialize];
+}
+
+-(void)initialize{
+    self.layer.cornerRadius = 5.0f;
+}
+
 +(id)viewForPlace:(GPSearchResult*)place{
-    PARPlaceView* view = [[[self alloc] initWithFrame:CGRectMake(0, 0, 100, 100)] autorelease];
+    PARPlaceView* view = [[[NSBundle mainBundle] loadNibNamed:@"PARPlaceView" owner:nil options:nil] objectAtIndex:0];
     view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
     
     return view;
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
