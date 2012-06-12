@@ -108,6 +108,7 @@
 		226B1A811579073F00D04163 /* PARARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 226B1A7F1579073F00D04163 /* PARARViewController.m */; };
 		226B1A821579073F00D04163 /* PARARViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226B1A801579073F00D04163 /* PARARViewController.xib */; };
 		22989D861585EB8800F819E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22989D851585EB8800F819E3 /* QuartzCore.framework */; };
+		22989DAA1587474100F819E3 /* PARPlaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22989DA91587474100F819E3 /* PARPlaceView.m */; };
 		22C73566157F429F00716984 /* PARSearchDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C73565157F429F00716984 /* PARSearchDisplayController.m */; };
 		22C7356C157F43AF00716984 /* JJImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C73569157F43AF00716984 /* JJImageView.m */; };
 		22C73570157F441C00716984 /* JJThumbnailCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7356F157F441B00716984 /* JJThumbnailCache.m */; };
@@ -294,6 +295,8 @@
 		226B1A7F1579073F00D04163 /* PARARViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARARViewController.m; sourceTree = "<group>"; };
 		226B1A801579073F00D04163 /* PARARViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PARARViewController.xib; sourceTree = "<group>"; };
 		22989D851585EB8800F819E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		22989DA81587474100F819E3 /* PARPlaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARPlaceView.h; sourceTree = "<group>"; };
+		22989DA91587474100F819E3 /* PARPlaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARPlaceView.m; sourceTree = "<group>"; };
 		22C73564157F429F00716984 /* PARSearchDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARSearchDisplayController.h; sourceTree = "<group>"; };
 		22C73565157F429F00716984 /* PARSearchDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARSearchDisplayController.m; sourceTree = "<group>"; };
 		22C73568157F43AF00716984 /* JJImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJImageView.h; sourceTree = "<group>"; };
@@ -706,6 +709,8 @@
 				226B1A801579073F00D04163 /* PARARViewController.xib */,
 				2215034C1583659500C4015E /* PARPlaceLayer.h */,
 				2215034D1583659500C4015E /* PARPlaceLayer.m */,
+				22989DA81587474100F819E3 /* PARPlaceView.h */,
+				22989DA91587474100F819E3 /* PARPlaceView.m */,
 			);
 			path = ARViewController;
 			sourceTree = "<group>";
@@ -872,6 +877,7 @@
 				2215034E1583659500C4015E /* PARPlaceLayer.m in Sources */,
 				22150359158643D700C4015E /* ARView.m in Sources */,
 				2215035D1586494600C4015E /* PlaceOfInterest.m in Sources */,
+				22989DAA1587474100F819E3 /* PARPlaceView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

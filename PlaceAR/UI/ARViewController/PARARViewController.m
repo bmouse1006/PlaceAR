@@ -58,6 +58,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.arview.frame = self.view.bounds;
+    self.arview.places = self.placeList;
     [UIApplication sharedApplication].statusBarHidden = YES;
     [self.arview start];
 }
@@ -65,10 +66,6 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [self.arview stop];
-}
-
--(void)setPlaceList:(NSArray *)placeList{
-    
 }
 
 @end

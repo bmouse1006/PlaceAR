@@ -47,7 +47,7 @@
 
 #import "ARView.h"
 #import "GPSearchResult.h"
-
+#import "PARPlaceView.h"
 #import <AVFoundation/AVFoundation.h>
 
 #pragma mark -
@@ -181,8 +181,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         _places = [places retain];
         
         [_places enumerateObjectsUsingBlock:^(GPSearchResult* place, NSUInteger idx, BOOL* stop){
-            NSValue* key = [self keyForPlace:place];
-//            UIView* view = [self vie
+            PARPlaceView* placeView = [PARPlaceView viewForPlace:place];
+            [self.viewsForPlaces setObject:placeView forKey:[self keyForPlace:place]];
+//            [self addSubview:placeView];
         }];
     }
 }
@@ -338,7 +339,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	// Add subviews in descending Z-order so they overlap properly
 	for (NSData *d in [orderedDistances reverseObjectEnumerator]) {
 		const DistanceAndIndex *distanceAndIndex = (const DistanceAndIndex *)d.bytes;
-		GPSearchResult *poi = (GPSearchResult *)[self.places objectAtIndex:distanceAndIndex->index];		
+		GPSearchResult *poi = (GPSearchResult *)[self.places objectAtIndex:distanceAndIndex->index];	
 		[self addSubview:[self.viewsForPlaces objectForKey:[self keyForPlace:poi]]];
 	}	
 }
