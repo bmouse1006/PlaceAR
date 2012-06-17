@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JJLabel.h"
 #import "GPSearchResult.h"
 
 @interface PARPlaceView : UIView
+
+@property (nonatomic, retain) IBOutlet JJLabel* titleLabel;
+@property (nonatomic, retain) IBOutlet JJLabel* subtitleLabel;
 
 +(id)viewForPlace:(GPSearchResult*)place;
 

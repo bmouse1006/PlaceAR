@@ -113,6 +113,8 @@
 		22C7356C157F43AF00716984 /* JJImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C73569157F43AF00716984 /* JJImageView.m */; };
 		22C73570157F441C00716984 /* JJThumbnailCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7356F157F441B00716984 /* JJThumbnailCache.m */; };
 		22C73580157F480C00716984 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7357F157F480C00716984 /* NSString+MD5.m */; };
+		22CEC7C9158E0D2B00787AB7 /* JJLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CEC7C8158E0D2B00787AB7 /* JJLabel.m */; };
+		22CEC7D2158E0DAE00787AB7 /* UIColor+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CEC7D1158E0DAE00787AB7 /* UIColor+Addition.m */; };
 		22E2D26F15878E910060AC13 /* PARPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E2D26E15878E910060AC13 /* PARPlaceView.xib */; };
 /* End PBXBuildFile section */
 
@@ -306,6 +308,10 @@
 		22C7356F157F441B00716984 /* JJThumbnailCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJThumbnailCache.m; sourceTree = "<group>"; };
 		22C7357E157F480C00716984 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		22C7357F157F480C00716984 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		22CEC7C7158E0D2B00787AB7 /* JJLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJLabel.h; sourceTree = "<group>"; };
+		22CEC7C8158E0D2B00787AB7 /* JJLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJLabel.m; sourceTree = "<group>"; };
+		22CEC7D0158E0DAE00787AB7 /* UIColor+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Addition.h"; sourceTree = "<group>"; };
+		22CEC7D1158E0DAE00787AB7 /* UIColor+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Addition.m"; sourceTree = "<group>"; };
 		22E2D26E15878E910060AC13 /* PARPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PARPlaceView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -347,6 +353,10 @@
 		2232BBDE157B5D2E00F8E847 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
+				22CEC7D0158E0DAE00787AB7 /* UIColor+Addition.h */,
+				22CEC7D1158E0DAE00787AB7 /* UIColor+Addition.m */,
+				22CEC7C7158E0D2B00787AB7 /* JJLabel.h */,
+				22CEC7C8158E0D2B00787AB7 /* JJLabel.m */,
 				22C7356E157F441B00716984 /* JJThumbnailCache.h */,
 				22C7356F157F441B00716984 /* JJThumbnailCache.m */,
 				22C73568157F43AF00716984 /* JJImageView.h */,
@@ -882,6 +892,8 @@
 				22150359158643D700C4015E /* ARView.m in Sources */,
 				2215035D1586494600C4015E /* PlaceOfInterest.m in Sources */,
 				22989DAA1587474100F819E3 /* PARPlaceView.m in Sources */,
+				22CEC7C9158E0D2B00787AB7 /* JJLabel.m in Sources */,
+				22CEC7D2158E0DAE00787AB7 /* UIColor+Addition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

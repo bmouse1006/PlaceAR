@@ -426,7 +426,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         double distance = [location distanceFromLocation:placeLocation];
         double scale = 1;
         if (distance > 400){
-            scale = (320/distance + 0.2);
+            scale = (200/distance + 0.5);
         }
         transform = [NSValue valueWithCGAffineTransform:CGAffineTransformMakeScale(scale, scale)];
         
