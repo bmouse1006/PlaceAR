@@ -454,9 +454,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     CLLocation* placeLocation = [[[CLLocation alloc] initWithLatitude:place.coordinate.latitude longitude:place.coordinate.longitude] autorelease];
     double distance = [location distanceFromLocation:placeLocation];
     if (distance < 1000){
-        return [NSString stringWithFormat:@"%dm", distance];
+        return [NSString stringWithFormat:@"%.0fm", distance];
     }else{
-        return [NSString stringWithFormat:@".1fkm", distance/1000];
+        return [NSString stringWithFormat:@"%.1fkm", distance/1000];
     }
 }
 
@@ -470,7 +470,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             _additionalTransform = CGAffineTransformMakeRotation(-M_PI/2);
             break;
         case UIDeviceOrientationPortraitUpsideDown:
-            _additionalTransform = CGAffineTransformMakeRotation(M_PI);
+            _additionalTransform = CGAffineTransformMakeRotation(M_PI-0.01);
         default:
             _additionalTransform = CGAffineTransformIdentity;
             break;

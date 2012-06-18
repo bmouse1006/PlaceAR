@@ -68,7 +68,7 @@
     self.distanceLabel.textColor = [UIColor whiteColor];
     self.distanceLabel.verticalAlignment = JJTextVerticalAlignmentMiddle;
     self.distanceLabel.textAlignment = UITextAlignmentCenter;
-    self.distanceLabel.shadowEnable = YES;
+//    self.distanceLabel.shadowEnable = YES;
     self.distanceLabel.shadowColor = [UIColor blackColor];
     self.distanceLabel.shadowOffset = CGSizeMake(0, 2);
     self.distanceLabel.shadowBlur = 0.8f;
