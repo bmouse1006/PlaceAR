@@ -20,12 +20,16 @@
 
 @synthesize titleLabel = _titleLabel;
 @synthesize subtitleLabel = _subtitleLabel;
+@synthesize distanceLabel = _distanceLabel;
 @synthesize place = _place;
+@synthesize backgroundView = _backgroundView;
 
 -(void)dealloc{
     self.titleLabel = nil;
     self.subtitleLabel = nil;
     self.place = nil;
+    self.backgroundView = nil;
+    self.distanceLabel = nil;
     [super dealloc];
 }
 
@@ -44,10 +48,10 @@
 }
 
 -(void)initialize{
-    self.layer.cornerRadius = 6.0f;
-    self.layer.masksToBounds = YES;
-    self.layer.borderWidth = 2.0f;
-    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.backgroundView.layer.cornerRadius = 6.0f;
+    self.backgroundView.layer.masksToBounds = YES;
+    self.backgroundView.layer.borderWidth = 2.0f;
+    self.backgroundView.layer.borderColor = [UIColor grayColor].CGColor;
     
     [self.titleLabel setContentEdgeInsets:UIEdgeInsetsMake(2, 4, 2, 4)];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
@@ -58,6 +62,16 @@
     self.subtitleLabel.font = [UIFont systemFontOfSize:12.0f];
     self.subtitleLabel.textColor = [UIColor whiteColor];
     self.subtitleLabel.verticalAlignment = JJTextVerticalAlignmentMiddle;
+    
+    [self.distanceLabel setContentEdgeInsets:UIEdgeInsetsMake(2, 4, 2, 4)];
+    self.distanceLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.distanceLabel.textColor = [UIColor whiteColor];
+    self.distanceLabel.verticalAlignment = JJTextVerticalAlignmentMiddle;
+    self.distanceLabel.textAlignment = UITextAlignmentCenter;
+    self.distanceLabel.shadowEnable = YES;
+    self.distanceLabel.shadowColor = [UIColor blackColor];
+    self.distanceLabel.shadowOffset = CGSizeMake(0, 2);
+    self.distanceLabel.shadowBlur = 0.8f;
 }
 
 +(id)viewForPlace:(GPSearchResult*)place{

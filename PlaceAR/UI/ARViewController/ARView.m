@@ -92,6 +92,8 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	mat4f_t projectionTransform;
 	mat4f_t cameraTransform;	
 	vec4f_t *placesOfInterestCoordinates;
+    
+    CGAffineTransform _additionalTransform;
 }
 
 @property (nonatomic, retain) UIView* captureView;
@@ -135,6 +137,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self stop];
 	[location release];
     self.captureView = nil;
@@ -153,7 +156,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    NSLog(@"%@", NSStringFromCGRect(self.bounds));
     self.captureView.frame = self.bounds;
 	createProjectionMatrix(projectionTransform, 60.0f*DEGREES_TO_RADIANS, self.bounds.size.width*1.0f / self.bounds.size.height, 0.25f, 1000.0f);
 }
@@ -195,16 +197,20 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 - (void)initialize
 {
+    _additionalTransform = CGAffineTransformIdentity;
+    
     self.viewsForPlaces = [NSMutableDictionary dictionary];
     self.scaleTransforms = [NSMutableDictionary dictionary];
     
 	self.captureView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
 	self.captureView.bounds = self.bounds;
 	[self addSubview:self.captureView];
-	[self sendSubviewToBack:self.captureView];
+	[self bringSubviewToFront:self.captureView];
 	
 	// Initialize projection matrix	
 	createProjectionMatrix(projectionTransform, 60.0f*DEGREES_TO_RADIANS, self.bounds.size.width*1.0f / self.bounds.size.height, 0.25f, 1000.0f);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)startCameraPreview
@@ -224,7 +230,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	[self.captureView.layer addSublayer:self.captureLayer];
 	
 	// Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
-    [self.captureSession startRunning];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.captureSession startRunning];
+    });
 }
 
 - (void)stopCameraPreview
@@ -377,8 +385,14 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         UIView* view = [self.viewsForPlaces objectForKey:[self keyForPlace:poi]];
 		if (v[2] < 0.0f) {
 			view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
-            view.transform = [self scaleTransformForPlace:poi];
+            CGAffineTransform transform = CGAffineTransformConcat([self scaleTransformForPlace:poi], _additionalTransform);
+            if (CGAffineTransformEqualToTransform(view.transform, transform) == NO){
+                [UIView animateWithDuration:0.2f animations:^{
+                    view.transform = CGAffineTransformConcat([self scaleTransformForPlace:poi], _additionalTransform);
+                }];
+            }
 			view.hidden = NO;
+            ((PARPlaceView*)view).distanceLabel.text = [self distanceStringWithPlace:poi];
 		} else {
 			view.hidden = YES;
 		}
@@ -434,6 +448,33 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     }
     
     return [transform CGAffineTransformValue];
+}
+                                            
+-(NSString*)distanceStringWithPlace:(GPSearchResult*)place{
+    CLLocation* placeLocation = [[[CLLocation alloc] initWithLatitude:place.coordinate.latitude longitude:place.coordinate.longitude] autorelease];
+    double distance = [location distanceFromLocation:placeLocation];
+    if (distance < 1000){
+        return [NSString stringWithFormat:@"%dm", distance];
+    }else{
+        return [NSString stringWithFormat:@".1fkm", distance/1000];
+    }
+}
+
+#pragma mark - notification call back
+-(void)orientationChanged:(NSNotification*)notification{
+    switch ([UIDevice currentDevice].orientation) {
+        case UIDeviceOrientationLandscapeLeft:
+            _additionalTransform = CGAffineTransformMakeRotation(M_PI/2);
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            _additionalTransform = CGAffineTransformMakeRotation(-M_PI/2);
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            _additionalTransform = CGAffineTransformMakeRotation(M_PI);
+        default:
+            _additionalTransform = CGAffineTransformIdentity;
+            break;
+    } 
 }
 
 @end

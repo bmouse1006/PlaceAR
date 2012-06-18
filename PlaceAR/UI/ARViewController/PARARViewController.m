@@ -10,7 +10,9 @@
 #import "PARARPlaceContainerLayer.h"
 #import "ARView.h"
 
-@interface PARARViewController ()
+@interface PARARViewController (){
+    BOOL _appearring;
+}
 
 @property (nonatomic, retain) ARView* arview;
 
@@ -22,6 +24,7 @@
 @synthesize arview = _arview;
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.placeList = nil;
     self.arview = nil;
     [super dealloc];
@@ -32,6 +35,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -42,7 +47,7 @@
     // Do any additional setup after loading the view from its nib.
     // Do any additional setup after loading the view, typically from a nib.
 
-    self.arview = [[[ARView alloc] initWithFrame:CGRectZero] autorelease];
+    self.arview = [[[ARView alloc] initWithFrame:self.view.bounds] autorelease];
     [self.view addSubview:self.arview];
 }
 
@@ -55,17 +60,34 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    self.arview.frame = self.view.bounds;
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.arview.frame = self.view.bounds;
     self.arview.places = self.placeList;
     [UIApplication sharedApplication].statusBarHidden = YES;
     [self.arview start];
+    _appearring = YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [self.arview stop];
+    _appearring = NO;
+}
+
+-(void)resignActive:(NSNotification*)notification{
+    [self.arview stop];
+}
+
+-(void)becomeActive:(NSNotification*)notification{
+    if (_appearring){
+        [self.arview start];
+    }
 }
 
 @end

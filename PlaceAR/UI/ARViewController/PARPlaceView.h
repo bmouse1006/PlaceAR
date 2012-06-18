@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain) IBOutlet JJLabel* titleLabel;
 @property (nonatomic, retain) IBOutlet JJLabel* subtitleLabel;
+@property (nonatomic, retain) IBOutlet JJLabel* distanceLabel;
+@property (nonatomic, retain) IBOutlet UIView* backgroundView;
 
 +(id)viewForPlace:(GPSearchResult*)place;
 
